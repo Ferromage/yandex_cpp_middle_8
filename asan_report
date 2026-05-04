@@ -1,0 +1,22 @@
+=================================================================
+==1905==ERROR: AddressSanitizer: new-delete-type-mismatch on 0x6d8f349e0010 in thread T0:
+  object passed to delete has wrong type:
+  size of the allocated type:   8 bytes;
+  size of the deallocated type: 1 bytes.
+    #0 0x716f35f613fb in operator delete(void*, unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:155
+    #1 0x59d9a497428c in main /workspaces/sprint8/tests/tests_data/leak_example.cpp:18
+    #2 0x716f35897577  (/lib/x86_64-linux-gnu/libc.so.6+0x2a577) (BuildId: ae7440bbdce614e0e79280c3b2e45b1df44e639c)
+    #3 0x716f3589763a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a63a) (BuildId: ae7440bbdce614e0e79280c3b2e45b1df44e639c)
+    #4 0x59d9a4974164 in _start (/workspaces/sprint8/build/leak_example+0x1164) (BuildId: 7c6c1d622564ad6b935a41dd6c94ca57aef9a08d)
+
+0x6d8f349e0010 is located 0 bytes inside of 8-byte region [0x6d8f349e0010,0x6d8f349e0018)
+allocated by thread T0 here:
+    #0 0x716f35f602db in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:86
+    #1 0x59d9a4974243 in main /workspaces/sprint8/tests/tests_data/leak_example.cpp:17
+    #2 0x716f35897577  (/lib/x86_64-linux-gnu/libc.so.6+0x2a577) (BuildId: ae7440bbdce614e0e79280c3b2e45b1df44e639c)
+    #3 0x716f3589763a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a63a) (BuildId: ae7440bbdce614e0e79280c3b2e45b1df44e639c)
+    #4 0x59d9a4974164 in _start (/workspaces/sprint8/build/leak_example+0x1164) (BuildId: 7c6c1d622564ad6b935a41dd6c94ca57aef9a08d)
+
+SUMMARY: AddressSanitizer: new-delete-type-mismatch /workspaces/sprint8/tests/tests_data/leak_example.cpp:18 in main
+==1905==HINT: if you don't care about these errors you may set ASAN_OPTIONS=new_delete_type_mismatch=0
+==1905==ABORTING
